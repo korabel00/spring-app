@@ -7,12 +7,17 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:property-placeholder location="classpath:musicPlayer.properties"/>
+
     <bean id="musicBean"
           class="com.solovev.spring.ClassicalMusic">
     </bean>
     <bean id="musicPlayer"
         class="com.solovev.spring.MusicPlayer">
-        <constructor-arg ref="musicBean"/>
+<!--    <constructor-arg ref="musicBean"/>--><!-- by Constructor-->
+        <property name="music" ref="musicBean"/> <!-- by Setter-->
+        <property name="name" value="${musicPlayer.name}"/>
+        <property name="volume" value="${musicPlayer.volume}"/>
     </bean>
 
 </beans>
