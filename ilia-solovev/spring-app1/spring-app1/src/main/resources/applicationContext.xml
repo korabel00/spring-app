@@ -9,13 +9,25 @@
 
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
 
-    <bean id="musicBean"
+    <bean id="musicBean1"
           class="com.solovev.spring.ClassicalMusic">
     </bean>
+    <bean id="musicBean2"
+          class="com.solovev.spring.JazzMusic">
+    </bean>
+    <bean id="musicBean3"
+          class="com.solovev.spring.RockMusic">
+    </bean>
+
     <bean id="musicPlayer"
         class="com.solovev.spring.MusicPlayer">
-<!--    <constructor-arg ref="musicBean"/>--><!-- by Constructor-->
-        <property name="music" ref="musicBean"/> <!-- by Setter-->
+        <property name="musicList">
+            <list>
+                <ref bean="musicBean1"/>
+                <ref bean="musicBean2"/>
+                <ref bean="musicBean3"/>
+            </list>
+        </property>
         <property name="name" value="${musicPlayer.name}"/>
         <property name="volume" value="${musicPlayer.volume}"/>
     </bean>
