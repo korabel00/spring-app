@@ -2,8 +2,11 @@ package com.solovev.spring;
 
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 @Component
-public class ClassicalMusic implements Music{
+public class ClassicalMusic implements Music {
 
     private ClassicalMusic() {}; //теперь нельзя создать объект через new
 
@@ -11,11 +14,13 @@ public class ClassicalMusic implements Music{
         return new ClassicalMusic();
     }
 
-    public void initBean() {
+    @PostConstruct
+    private void initBean() {
         System.out.println("Initialization classical music bean...");
     }
 
-    public void destroyBean() {
+    @PreDestroy
+    private void destroyBean() {
         System.out.println("Destruction classical music bean...");
     }
 

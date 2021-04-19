@@ -1,6 +1,8 @@
 package com.solovev.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,15 +11,19 @@ import java.util.List;
 public class MusicPlayer {
 
     @Autowired
-    private List<Music> musicList;
+    private List<Music> genreList;
+
+    @Autowired
+    @Qualifier("jazzMusic")
+    private Music music;
     private String name;
     private int volume;
 
     public MusicPlayer() {}
 
     //IoC by Setter
-    public void setMusicList(List<Music> musicList) {
-        this.musicList = musicList;
+    public void setGenreList(List<Music> genreList) {
+        this.genreList = genreList;
     }
 
     //IoC by Constructor
@@ -26,17 +32,22 @@ public class MusicPlayer {
 //    }
 
 
-    public void playMusic() {
+    public void playMusicList() {
 
-        for (Music genre: musicList) {
+        for (Music genre: genreList) {
             System.out.println("Playing: " + genre.getSong());
         }
+    }
+
+    public void playMusic() {
+        System.out.println("Playing: " + music.getSong());
     }
 
     public String getName() {
         return name;
     }
 
+    @Value("${musicPlayer.name}")
     public void setName(String name) {
         this.name = name;
     }
@@ -45,6 +56,7 @@ public class MusicPlayer {
         return volume;
     }
 
+    @Value("${musicPlayer.volume}")
     public void setVolume(int volume) {
         this.volume = volume;
     }
