@@ -1,11 +1,15 @@
 package com.solovev.spring;
 
-import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class MusicPlayer {
 
-    private List<Music> musicList = new ArrayList<>();
+    @Autowired
+    private List<Music> musicList;
     private String name;
     private int volume;
 
